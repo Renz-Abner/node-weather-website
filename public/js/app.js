@@ -1,15 +1,3 @@
-// //HTTP REQUEST using FETCH
-// fetch("http://localhost:3000/weather?address=boston").then((response) => {
-//   response.json().then((data) => {
-//     if (data.error) {
-//       console.log(data.error);
-//     } else {
-//       console.log(data.forecast);
-//       console.log(data.location);
-//     }
-//   });
-// });
-
 //SELECTS THE ITEM IN THE HTML
 const weatherForm = document.querySelector("form");
 const search = document.querySelector("input");
@@ -31,18 +19,16 @@ weatherForm.addEventListener("submit", (e) => {
     messageOne.textContent = "Invalid Input";
   } else {
     console.log(location);
-    fetch("http://localhost:3000/weather?address=" + location).then(
-      (response) => {
-        response.json().then((data) => {
-          if (data.error) {
-            messageOne.textContent = data.error;
-          } else {
-            messageOne.textContent = data.forecast;
-            messageTwo.textContent = data.location;
-          }
-        });
-      }
-    );
+    fetch("/weather?address=" + location).then((response) => {
+      response.json().then((data) => {
+        if (data.error) {
+          messageOne.textContent = data.error;
+        } else {
+          messageOne.textContent = data.forecast;
+          messageTwo.textContent = data.location;
+        }
+      });
+    });
   }
 
   //HTTP REQUEST using FETCH
